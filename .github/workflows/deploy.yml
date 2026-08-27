@@ -19,20 +19,22 @@ jobs:
           timeout: 30s
           command_timeout: 10m
           script: |
-           set -e
-          
-           # Create directory if it doesn't exist
-           mkdir -p /home/chetansuthar734/ci_cd
-  
-           cd /home/chetansuthar734/ci_cd
-  
-           # Initialize git repo if needed, or pull if it exists
-           if [ -d .git ]; then
-            git pull origin main
-           else
-            git clone https://github.com/chetansuthar734/ci_cd.git .
-           fi
-  
-           docker compose up -d --build
-  
-           docker image prune -f
+            set -e
+
+            APP_DIR="/home/chetansuthar734/ci_cd"
+
+            mkdir -p "$APP_DIR"
+            cd "$APP_DIR"
+
+            if [ -d ".git" ]; then
+              git fetch origin main
+              git reset --hard origin/main
+            else
+              git clone https://github.com/chetansuthar734/ci_cd.git .
+            fi
+
+            docker compose up -d --build
+
+            docker compose ps
+
+            docker image prune -f

@@ -1,0 +1,12 @@
+services:
+  fastapi:
+    image: fast-api
+    expose:
+      - "8000"
+
+  react:
+    image: react-app
+    ports:
+      - "3000:80"
+    depends_on:
+      - fastapi

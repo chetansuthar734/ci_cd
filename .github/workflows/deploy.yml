@@ -19,12 +19,20 @@ jobs:
           timeout: 30s
           command_timeout: 10m
           script: |
-            set -e
-
-            cd /home/chetansuthar734/ci_cd
-
+           set -e
+          
+           # Create directory if it doesn't exist
+           mkdir -p /home/chetansuthar734/ci_cd
+  
+           cd /home/chetansuthar734/ci_cd
+  
+           # Initialize git repo if needed, or pull if it exists
+          if [ -d .git ]; then
             git pull origin main
-
-            docker compose up -d --build
-
-            docker image prune -f
+          else
+            git clone <your-repo-url> .
+          fi
+  
+          docker compose up -d --build
+  
+          docker image prune -f

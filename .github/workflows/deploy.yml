@@ -27,12 +27,12 @@ jobs:
            cd /home/chetansuthar734/ci_cd
   
            # Initialize git repo if needed, or pull if it exists
-          if [ -d .git ]; then
+           if [ -d .git ]; then
             git pull origin main
-          else
+           else
             git clone <your-repo-url> .
-          fi
+           fi
   
-          docker compose up -d --build
+           docker compose up -d --build
   
-          docker image prune -f
+           docker image prune -f

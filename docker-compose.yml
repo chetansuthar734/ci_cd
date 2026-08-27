@@ -1,12 +1,16 @@
-services:
-  fastapi:
-    image: fast-api
-    expose:
-      - "8000"
+version: '3.8'
 
-  react:
-    image: react-app
+services:
+  react-app:
+    build:
+      context: ./path/to/react-app  # Path to Dockerfile
+      dockerfile: Dockerfile
     ports:
-      - "3000:80"
-    depends_on:
-      - fastapi
+      - "3000:3000"
+
+  fast-api:
+    build:
+      context: ./path/to/fast-api  # Path to Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"

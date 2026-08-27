@@ -30,7 +30,7 @@ jobs:
            if [ -d .git ]; then
             git pull origin main
            else
-            git clone <your-repo-url> .
+            git clone https://github.com/chetansuthar734/ci_cd.git .
            fi
   
            docker compose up -d --build
